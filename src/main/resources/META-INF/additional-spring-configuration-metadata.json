@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.security.user.profile",
+      "type": "java.lang.String",
+      "description": "Description for spring.security.user.profile."
+  }
+] }
