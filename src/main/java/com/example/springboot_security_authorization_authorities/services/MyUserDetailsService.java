@@ -16,9 +16,9 @@ import java.util.List;
 public class MyUserDetailsService implements UserDetailsService {
 
   //LOAD PROPERTIES
-  @Value("${spring.security.user.profile}")  private String storedProfile;
   @Value("${spring.security.user.name}")     private String storedUsername;
   @Value("${spring.security.user.password}") private String storedPassword;
+  @Value("${spring.security.user.profile}")  private String storedProfile;
   @Value("${profile.user}")                  private String profileUser;
   @Value("${profile.admin}")                 private String profileAdmin;
 
