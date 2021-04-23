@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class AccountService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
 
   //LOAD PROPERTIES
   @Value("${spring.security.user.profile}") private String userProfile;
