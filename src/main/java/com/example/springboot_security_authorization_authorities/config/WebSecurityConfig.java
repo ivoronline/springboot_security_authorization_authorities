@@ -14,11 +14,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+  //=======================================================================
+  // PASSWORD ENCODER
+  //=======================================================================
   @Bean
   PasswordEncoder passwordEncoder() {
     return NoOpPasswordEncoder.getInstance();
   }
 
+  //=================================================================
+  // CONFIGURE
+  //=================================================================
   @Override
   protected void configure(HttpSecurity httpSecurity) throws Exception {
     httpSecurity.formLogin();

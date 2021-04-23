@@ -16,17 +16,25 @@ import java.util.List;
 public class MyUserDetailsService implements UserDetailsService {
 
   //LOAD PROPERTIES
-  @Value("${spring.security.user.profile}") private String userProfile;
-  @Value("${profile.user}")                 private String profileUser;
-  @Value("${profile.admin}")                private String profileAdmin;
+  @Value("${spring.security.user.profile}")  private String storedProfile;
+  @Value("${spring.security.user.name}")     private String storedUsername;
+  @Value("${spring.security.user.password}") private String storedPassword;
+  @Value("${profile.user}")                  private String profileUser;
+  @Value("${profile.admin}")                 private String profileAdmin;
 
+  //=======================================================================
+  // LOAD USER BY USERNAME
+  //=======================================================================
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+  public UserDetails loadUserByUsername(String enteredUsername) throws UsernameNotFoundException {
+
+    //CHECK USERNAME
+    if(!enteredUsername.equals(storedUsername) ) { throw new UsernameNotFoundException(enteredUsername); }
 
     //GET AUTHORITIES FOR GIVEN USER PROFILE
     String userAuthorities = "";
-    if(userProfile.equals("USER") ) { userAuthorities = profileUser;  }
-    if(userProfile.equals("ADMIN")) { userAuthorities = profileAdmin; }
+    if(storedProfile.equals("USER") ) { userAuthorities = profileUser;  }
+    if(storedProfile.equals("ADMIN")) { userAuthorities = profileAdmin; }
 
     //GET AUTHORITIES FROM STRING PROPERTY
     String[]     authoritiesArray = userAuthorities.split(", ");
@@ -39,11 +47,14 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 
     //CREATE USER
-    User user = new User("myuser", "mypassword", true, true, true, true, authorities);
+    UserDetails userDetails = new User(enteredUsername, storedPassword, authorities);
 
     //RETURN USER
-    return user;
+    return userDetails;
 
   }
 
 }
+
+
+
